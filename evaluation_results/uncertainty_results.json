@@ -1,0 +1,16 @@
+{
+  "standard": {
+    "accuracy": 0.38666666666666666,
+    "mean_uncertainty": 0.012062732130289078,
+    "uncertainty_correct": 0.013019572012126446,
+    "uncertainty_incorrect": 0.011459508910775185,
+    "uncertainty_ratio": 0.8801755309104919
+  },
+  "safety": {
+    "accuracy": 0.49333333333333335,
+    "mean_uncertainty": 0.012246746569871902,
+    "uncertainty_correct": 0.012118836864829063,
+    "uncertainty_incorrect": 0.012371289543807507,
+    "uncertainty_ratio": 1.0208314657211304
+  }
+}

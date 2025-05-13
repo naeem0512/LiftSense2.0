@@ -1,0 +1,18 @@
+{
+  "safety_enhanced": true,
+  "high_fatigue_detection_rate": 0.833,
+  "critical_error_rate": 0.0,
+  "integration_date": "2025-05-11 13:49:00",
+  "model_versions": {
+    "main": "safety_enhanced_model.keras",
+    "early_phase": "early_phase_safety_model.keras",
+    "middle_phase": "middle_phase_safety_model.keras",
+    "late_phase": "late_phase_safety_model.keras"
+  },
+  "training_params": {
+    "epochs": 50,
+    "batch_size": 16,
+    "patience": 10,
+    "safety_focus": true
+  }
+}

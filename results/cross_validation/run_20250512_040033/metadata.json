@@ -1,0 +1,36 @@
+{
+    "feature_names": [
+        "Set",
+        "Rep",
+        "RepSpeed",
+        "ForceOutput",
+        "HeartRate",
+        "GripStrength",
+        "VelocityLoss",
+        "RecoveryRate",
+        "FitnessLevel",
+        "WorkoutGoal",
+        "Gender",
+        "Age",
+        "work_capacity",
+        "relative_intensity",
+        "density",
+        "velocity_force_ratio",
+        "fatigue_index",
+        "recovery_efficiency",
+        "rolling_velocity",
+        "rolling_force",
+        "velocity_trend"
+    ],
+    "class_names": [
+        "High",
+        "Low",
+        "Moderate"
+    ],
+    "data_shape": [
+        250,
+        10,
+        21
+    ],
+    "timestamp": "20250512_040033"
+}

@@ -1,0 +1,7 @@
+{
+    "data_path": "data/workout_data.csv",
+    "model_path": "data/models/best_model.h5",
+    "background_size": 100,
+    "top_n_features": 5,
+    "timestamp": "20250512_033434"
+}

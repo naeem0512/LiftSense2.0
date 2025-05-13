@@ -1,0 +1,52 @@
+# LiftSense 2.0 Requirements
+
+# Core dependencies
+numpy>=1.20.0
+pandas>=1.3.0
+scipy>=1.7.0
+matplotlib>=3.4.0
+scikit-learn>=1.0.2
+
+# Neural network frameworks
+tensorflow>=2.8.0
+# tensorflow-gpu>=2.8.0  # Uncomment for GPU support
+
+# Web frameworks and API
+Flask>=2.0.0
+Flask-SocketIO>=5.0.0
+Flask-Cors>=3.0.10
+dash>=2.5.0
+dash-bootstrap-components>=1.0.0
+plotly>=5.5.0
+
+# Signal processing
+biosppy>=0.6.0
+
+# Data visualization 
+seaborn>=0.12.0
+
+# Documentation
+sphinx>=4.0.0
+sphinx-rtd-theme>=1.0.0
+
+# Testing
+pytest>=7.0.0
+pytest-cov>=3.0.0
+
+# Utilities
+tqdm>=4.62.0
+colorama>=0.4.4
+joblib>=1.2.0
+PyYAML>=6.0
+
+# Optional - Google Fit integration
+google-auth>=2.3.0
+google-auth-oauthlib>=0.4.6
+google-api-python-client>=2.33.0
+
+# Optional - Hardware support
+# pyserial>=3.5  # For direct sensor connections
+# bleak>=0.14.0  # For Bluetooth LE
+
+# Added from the code block
+shap>=0.41.0

@@ -1,0 +1,282 @@
+[
+  {
+    "feature1": "work_capacity",
+    "feature2": "density",
+    "correlation": 0.9949389235159666
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.9592932043627576
+  },
+  {
+    "feature1": "work_capacity",
+    "feature2": "fatigue_index",
+    "correlation": 0.9421059099713847
+  },
+  {
+    "feature1": "density",
+    "feature2": "fatigue_index",
+    "correlation": 0.9323651073577547
+  },
+  {
+    "feature1": "sets",
+    "feature2": "grip_strength",
+    "correlation": 0.9282066424025807
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "grip_strength",
+    "correlation": 0.9101002864393944
+  },
+  {
+    "feature1": "grip_strength",
+    "feature2": "relative_intensity",
+    "correlation": 0.9098952190043654
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.9053060573311861
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "heart_rate",
+    "correlation": 0.8808882056222735
+  },
+  {
+    "feature1": "velocity_loss",
+    "feature2": "fatigue_index",
+    "correlation": 0.8740178317804905
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "grip_strength",
+    "correlation": 0.8691126824499219
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "rolling_velocity",
+    "correlation": 0.8686602796828738
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "rolling_force",
+    "correlation": 0.8674010214356292
+  },
+  {
+    "feature1": "sets",
+    "feature2": "relative_intensity",
+    "correlation": 0.8587543079327572
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "relative_intensity",
+    "correlation": 0.8552204533490693
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.8468062160784321
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "relative_intensity",
+    "correlation": 0.8343565044092673
+  },
+  {
+    "feature1": "velocity_loss",
+    "feature2": "work_capacity",
+    "correlation": 0.8336616404807717
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "force_output",
+    "correlation": 0.8332372862977104
+  },
+  {
+    "feature1": "rolling_velocity",
+    "feature2": "rolling_force",
+    "correlation": 0.8316661437058773
+  },
+  {
+    "feature1": "velocity_loss",
+    "feature2": "density",
+    "correlation": 0.8305056482648697
+  },
+  {
+    "feature1": "velocity_force_ratio",
+    "feature2": "rolling_velocity",
+    "correlation": 0.8292540133199545
+  },
+  {
+    "feature1": "reps",
+    "feature2": "velocity_loss",
+    "correlation": 0.8282526672760426
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "relative_intensity",
+    "correlation": 0.8275946204321116
+  },
+  {
+    "feature1": "grip_strength",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.825539094919096
+  },
+  {
+    "feature1": "relative_intensity",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.8083923237273737
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "work_capacity",
+    "correlation": 0.7960491050995996
+  },
+  {
+    "feature1": "sets",
+    "feature2": "heart_rate",
+    "correlation": 0.7920012731961996
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "density",
+    "correlation": 0.7901375031488971
+  },
+  {
+    "feature1": "velocity_force_ratio",
+    "feature2": "rolling_force",
+    "correlation": 0.7887452539935257
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "fatigue_index",
+    "correlation": 0.7853089020966092
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "work_capacity",
+    "correlation": 0.7848936447429402
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "density",
+    "correlation": 0.7827388325402381
+  },
+  {
+    "feature1": "relative_intensity",
+    "feature2": "fatigue_index",
+    "correlation": 0.78190880146942
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "rolling_velocity",
+    "correlation": 0.7750745233709773
+  },
+  {
+    "feature1": "grip_strength",
+    "feature2": "rolling_velocity",
+    "correlation": 0.7608334491211806
+  },
+  {
+    "feature1": "work_capacity",
+    "feature2": "relative_intensity",
+    "correlation": 0.7579762024944007
+  },
+  {
+    "feature1": "relative_intensity",
+    "feature2": "density",
+    "correlation": 0.7489911991372241
+  },
+  {
+    "feature1": "heart_rate",
+    "feature2": "fatigue_index",
+    "correlation": 0.7461759247911347
+  },
+  {
+    "feature1": "sets",
+    "feature2": "rep_speed",
+    "correlation": 0.7424752917652434
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "heart_rate",
+    "correlation": 0.7407725962497792
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "grip_strength",
+    "correlation": 0.7401561603266854
+  },
+  {
+    "feature1": "grip_strength",
+    "feature2": "work_capacity",
+    "correlation": 0.7394546411536119
+  },
+  {
+    "feature1": "relative_intensity",
+    "feature2": "rolling_velocity",
+    "correlation": 0.7377063959494081
+  },
+  {
+    "feature1": "work_capacity",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.7362407543814629
+  },
+  {
+    "feature1": "grip_strength",
+    "feature2": "density",
+    "correlation": 0.7356118408825041
+  },
+  {
+    "feature1": "density",
+    "feature2": "velocity_force_ratio",
+    "correlation": 0.7335018685750245
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "work_capacity",
+    "correlation": 0.7289873254117524
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "rolling_force",
+    "correlation": 0.7275165088180727
+  },
+  {
+    "feature1": "relative_intensity",
+    "feature2": "rolling_force",
+    "correlation": 0.7272718006592767
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "density",
+    "correlation": 0.7268361476142248
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "rolling_velocity",
+    "correlation": 0.7156701303660881
+  },
+  {
+    "feature1": "force_output",
+    "feature2": "fatigue_index",
+    "correlation": 0.7152974026807339
+  },
+  {
+    "feature1": "velocity_force_ratio",
+    "feature2": "fatigue_index",
+    "correlation": 0.7129065209146749
+  },
+  {
+    "feature1": "rep_speed",
+    "feature2": "velocity_loss",
+    "correlation": 0.7022242081742568
+  },
+  {
+    "feature1": "work_capacity",
+    "feature2": "rolling_velocity",
+    "correlation": 0.7022156836153745
+  }
+]

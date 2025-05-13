@@ -1,0 +1,33 @@
+{
+  "Uncalibrated": {
+    "accuracy": 0.38,
+    "brier_score": 0.22045794688538203,
+    "ece": 0.015781198740005498,
+    "bin_accuracies": [
+      0.38
+    ],
+    "bin_confidences": [
+      0.3642188012599945
+    ],
+    "bin_counts": [
+      50
+    ]
+  },
+  "Temperature Scaled": {
+    "accuracy": 0.38,
+    "brier_score": 0.22019011828286922,
+    "ece": 0.018924947381019606,
+    "bin_accuracies": [
+      0.38461538461538464,
+      0.36363636363636365
+    ],
+    "bin_confidences": [
+      0.37469232082366943,
+      0.41447708010673523
+    ],
+    "bin_counts": [
+      39,
+      11
+    ]
+  }
+}

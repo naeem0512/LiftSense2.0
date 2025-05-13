@@ -1,0 +1,31 @@
+{
+  "user_metrics": {
+    "user_0": {
+      "base_accuracy": 0.3199999928474426,
+      "personalized_accuracy": 0.3199999928474426,
+      "improvement": 0.0
+    },
+    "user_1": {
+      "base_accuracy": 0.36000001430511475,
+      "personalized_accuracy": 0.30000001192092896,
+      "improvement": -0.06000000238418579
+    },
+    "user_2": {
+      "base_accuracy": 0.3400000035762787,
+      "personalized_accuracy": 0.3199999928474426,
+      "improvement": -0.02000001072883606
+    },
+    "user_3": {
+      "base_accuracy": 0.3199999928474426,
+      "personalized_accuracy": 0.36000001430511475,
+      "improvement": 0.04000002145767212
+    },
+    "user_4": {
+      "base_accuracy": 0.30000001192092896,
+      "personalized_accuracy": 0.46000000834465027,
+      "improvement": 0.1599999964237213
+    }
+  },
+  "mean_improvement": 0.024000000953674317,
+  "personalization_rate": 0.4
+}

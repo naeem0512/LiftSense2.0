@@ -1,0 +1,12 @@
+{
+    "data_dir": "data",
+    "model_dir": "data/models",
+    "logs_dir": "logs",
+    "web_port": 5000,
+    "api_port": 5001,
+    "enable_web": true,
+    "enable_api": true,
+    "enable_dashboard": true,
+    "debug_mode": false,
+    "simulation_mode": true
+}

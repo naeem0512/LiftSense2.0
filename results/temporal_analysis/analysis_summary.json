@@ -1,0 +1,51 @@
+{
+  "model_architecture": null,
+  "sequence_length": 10,
+  "n_features": 21,
+  "feature_names": [
+    "sets",
+    "reps",
+    "rep_speed",
+    "force_output",
+    "heart_rate",
+    "grip_strength",
+    "velocity_loss",
+    "recovery_rate",
+    "fitness_level",
+    "workout_goal",
+    "gender",
+    "age",
+    "work_capacity",
+    "relative_intensity",
+    "density",
+    "velocity_force_ratio",
+    "fatigue_index",
+    "recovery_efficiency",
+    "rolling_velocity",
+    "rolling_force",
+    "velocity_trend"
+  ],
+  "early_warning_accuracy": 0.3346747149564051,
+  "confusion_matrix": [
+    [
+      0,
+      0,
+      496
+    ],
+    [
+      0,
+      0,
+      496
+    ],
+    [
+      0,
+      0,
+      499
+    ]
+  ],
+  "class_names": [
+    "High",
+    "Low",
+    "Moderate"
+  ]
+}

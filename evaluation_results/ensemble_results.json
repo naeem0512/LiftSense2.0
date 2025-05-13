@@ -1,0 +1,4 @@
+{
+  "error": "Prediction error: 'EnsembleModelManager' object has no attribute 'predict'",
+  "accuracy": 0.0
+}

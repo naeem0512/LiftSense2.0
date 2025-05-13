@@ -1,0 +1,23 @@
+{
+  "velocity_loss": 0.4398907103825136,
+  "fatigue_index": 0.21584699453551914,
+  "grip_strength": 0.1885245901639344,
+  "relative_intensity": 0.0901639344262295,
+  "sets": 0.08469945355191255,
+  "velocity_force_ratio": 0.07650273224043713,
+  "rep_speed": 0.04644808743169393,
+  "recovery_efficiency": 0.040983606557376984,
+  "reps": 0.02732240437158462,
+  "workout_goal": 0.024590163934426146,
+  "density": 0.024590163934426146,
+  "recovery_rate": 0.021857923497267673,
+  "force_output": 0.0191256830601092,
+  "fitness_level": 0.016393442622950838,
+  "heart_rate": 0.010928961748633892,
+  "work_capacity": 0.010928961748633892,
+  "age": 0.008196721311475419,
+  "velocity_trend": 0.008196721311475419,
+  "rolling_force": 0.005464480874316946,
+  "gender": 0.002732240437158473,
+  "rolling_velocity": 0.0
+}

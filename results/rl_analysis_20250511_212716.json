@@ -1,0 +1,66 @@
+{
+  "recommendations": [
+    {
+      "formatted": "Next set: 19.0kg, 9 reps, rest for 72 seconds\nInsight: Moderate velocity loss indicates some fatigue",
+      "fatigue_level": "Moderate",
+      "data": {
+        "weight": 19.0,
+        "reps": 9,
+        "rest_time": 72,
+        "confidence": 0.5,
+        "safety_score": 0.0,
+        "performance_score": 0.0,
+        "adherence_score": 0.0,
+        "reward": 0.0
+      }
+    },
+    {
+      "formatted": "Next set: 18.0kg, 8 reps, rest for 90 seconds\nInsight: Significant velocity loss indicates high fatigue",
+      "fatigue_level": "High",
+      "data": {
+        "weight": 18.0,
+        "reps": 8,
+        "rest_time": 90,
+        "confidence": 0.5,
+        "safety_score": 0.0,
+        "performance_score": 0.0,
+        "adherence_score": 0.0,
+        "reward": 0.0
+      }
+    },
+    {
+      "formatted": "Next set: 18.0kg, 8 reps, rest for 90 seconds\nInsight: Significant velocity loss indicates high fatigue",
+      "fatigue_level": "High",
+      "data": {
+        "weight": 18.0,
+        "reps": 8,
+        "rest_time": 90,
+        "confidence": 0.5,
+        "safety_score": 0.0,
+        "performance_score": 0.0,
+        "adherence_score": 0.0,
+        "reward": 0.0
+      }
+    }
+  ],
+  "traditional": [
+    "Next set: 18.0 kg, 10 reps, rest for 60 seconds\nInsight: Moderate velocity loss indicates some fatigue",
+    "Next set: 17.0 kg, 10 reps, rest for 60 seconds\nInsight: Significant velocity loss indicates high fatigue",
+    "Next set: 18.0 kg, 10 reps, rest for 60 seconds\nInsight: Significant velocity loss indicates high fatigue"
+  ],
+  "analysis": {
+    "metrics": {
+      "count": 3,
+      "weight_difference": 0.6666666666666666,
+      "rep_difference": -1.6666666666666667,
+      "rest_difference": 24.0,
+      "rl_avg_confidence": 0.5,
+      "rl_avg_safety": 0.0
+    },
+    "summary": {
+      "more_conservative": true,
+      "higher_rest": true,
+      "confidence": "Moderate"
+    }
+  }
+}

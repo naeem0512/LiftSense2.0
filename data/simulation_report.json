@@ -1,0 +1,15 @@
+{
+  "num_users": 150,
+  "num_sets": 5,
+  "num_reps": 10,
+  "fatigue_distribution": {
+    "Low": 2475,
+    "Moderate": 2475,
+    "High": 2550
+  },
+  "force_velocity_correlation": 0.8285100535527444,
+  "hr_range": [
+    62,
+    123
+  ]
+}

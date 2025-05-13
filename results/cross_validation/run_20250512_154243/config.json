@@ -1,0 +1,6 @@
+{
+    "n_splits": 5,
+    "l2_reg": 0.01,
+    "dropout_rate": 0.3,
+    "timestamp": "20250512_154243"
+}

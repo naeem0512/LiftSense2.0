@@ -1,0 +1,66 @@
+{
+  "recommendations": [
+    {
+      "formatted": "Next set: 36.8 kg, 8 reps, rest for 54 seconds\nInsight: Low velocity loss indicates good endurance",
+      "fatigue_level": "Low",
+      "data": {
+        "weight": 36.8,
+        "reps": 8,
+        "rest_time": 54,
+        "confidence": 0.5,
+        "safety_score": 0.0,
+        "performance_score": 0.0,
+        "adherence_score": 0.0,
+        "reward": 0.0
+      }
+    },
+    {
+      "formatted": "Next set: 31.5 kg, 6 reps, rest for 90 seconds\nInsight: Significant velocity loss indicates high fatigue",
+      "fatigue_level": "High",
+      "data": {
+        "weight": 31.5,
+        "reps": 6,
+        "rest_time": 90,
+        "confidence": 0.5,
+        "safety_score": 0.0,
+        "performance_score": 0.0,
+        "adherence_score": 0.0,
+        "reward": 0.0
+      }
+    },
+    {
+      "formatted": "Next set: 31.5 kg, 6 reps, rest for 90 seconds\nInsight: Significant velocity loss indicates high fatigue",
+      "fatigue_level": "High",
+      "data": {
+        "weight": 31.5,
+        "reps": 6,
+        "rest_time": 90,
+        "confidence": 0.5,
+        "safety_score": 0.0,
+        "performance_score": 0.0,
+        "adherence_score": 0.0,
+        "reward": 0.0
+      }
+    }
+  ],
+  "traditional": [
+    "Next set: 35.0 kg, 8 reps, rest for 60 seconds\nInsight: Low velocity loss indicates good endurance",
+    "Next set: 31.5 kg, 8 reps, rest for 60 seconds\nInsight: Significant velocity loss indicates high fatigue",
+    "Next set: 29.8 kg, 8 reps, rest for 60 seconds\nInsight: Significant velocity loss indicates high fatigue"
+  ],
+  "analysis": {
+    "metrics": {
+      "count": 3,
+      "weight_difference": 1.1666666666666654,
+      "rep_difference": -1.3333333333333333,
+      "rest_difference": 18.0,
+      "rl_avg_confidence": 0.5,
+      "rl_avg_safety": 0.0
+    },
+    "summary": {
+      "more_conservative": true,
+      "higher_rest": true,
+      "confidence": "Moderate"
+    }
+  }
+}

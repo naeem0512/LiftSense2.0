@@ -1,0 +1,59 @@
+{
+  "progression_rates": {
+    "set_avg_speed_fatigue_Low": {
+      "slope": -0.11869303284461795,
+      "r_squared": 0.9867248589208883,
+      "p_value": 0.0006517575948263484
+    },
+    "set_avg_force_fatigue_Low": {
+      "slope": 15.244960108215423,
+      "r_squared": 0.984187585130902,
+      "p_value": 0.000847928076239788
+    },
+    "set_avg_vel_loss_fatigue_Low": {
+      "slope": 0.6235532424951291,
+      "r_squared": 0.032381997781241276,
+      "p_value": 0.7721231950561811
+    },
+    "set_avg_speed_fatigue_High": {
+      "slope": -0.13178313681551948,
+      "r_squared": 0.9916655754426883,
+      "p_value": 0.0003237365089173057
+    },
+    "set_avg_force_fatigue_High": {
+      "slope": 15.60630755246485,
+      "r_squared": 0.9903762977781639,
+      "p_value": 0.0004018469390393875
+    },
+    "set_avg_vel_loss_fatigue_High": {
+      "slope": 3.999175045824046,
+      "r_squared": 0.7868211319631419,
+      "p_value": 0.044800454368663534
+    },
+    "set_avg_speed_fatigue_Moderate": {
+      "slope": -0.1241042442363459,
+      "r_squared": 0.992186098026486,
+      "p_value": 0.00029384069606564633
+    },
+    "set_avg_force_fatigue_Moderate": {
+      "slope": 15.922197987566273,
+      "r_squared": 0.9882521410599534,
+      "p_value": 0.0005423311371682553
+    },
+    "set_avg_vel_loss_fatigue_Moderate": {
+      "slope": 2.0553202333789407,
+      "r_squared": 0.4157700957813451,
+      "p_value": 0.24011857174149212
+    }
+  },
+  "feature_summary": {
+    "n_users": 150,
+    "n_sets": 4,
+    "n_reps": 9,
+    "fatigue_levels": [
+      "Low",
+      "High",
+      "Moderate"
+    ]
+  }
+}

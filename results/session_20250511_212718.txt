@@ -1,0 +1,26 @@
+=== Session Report ===
+User: Male, 32yo
+Level: Intermediate | Goal: Hypertrophy
+Recovery Rate: 1.1x
+
+=== Set-by-Set Metrics ===
+
+=== RL Recommendation Analysis ===
+Recommendations compared: 3
+RL vs Traditional differences:
+  Weight: 1.7kg
+  Reps: -1.0
+  Rest: 12.0s
+Average RL confidence: 0.50
+Average RL safety score: 0.00
+
+Summary: RL recommendations were more conservative (lower weight/reps). RL suggested longer rest periods. RL confidence was moderate.
+
+=== Safety Events ===
+- EXCESSIVE_VELOCITY_LOSS
+
+=== Performance Trends ===
+Peak Velocity Loss: 0.0%
+Peak HR: 0bpm
+Average Mechanical Work: nan N·m/s
+Fatigue Progression: 

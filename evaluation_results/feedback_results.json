@@ -1,0 +1,77 @@
+[
+  {
+    "scenario": "Beginner with high fatigue",
+    "standard": {
+      "fatigue": "Moderate",
+      "confidence": 0.5,
+      "recommendation": "Next set: 12.0kg, 6 reps, rest for 90 seconds"
+    },
+    "enhanced": {
+      "fatigue": "Moderate",
+      "confidence": 0.5,
+      "recommendation": "Next set: 12.0kg, 6 reps, rest for 90 seconds",
+      "analysis": {
+        "velocity_loss": 250.0,
+        "force_decay": 45.0,
+        "total_work": -57.00000000000002,
+        "power_trend": -1,
+        "early_vs_late_speed_ratio": -1.5000000000000002,
+        "insights": [
+          "Significant velocity loss indicates high fatigue",
+          "Substantial drop in speed during later reps"
+        ]
+      }
+    },
+    "velocity_loss": 235.0
+  },
+  {
+    "scenario": "Advanced with moderate fatigue",
+    "standard": {
+      "fatigue": "Moderate",
+      "confidence": 0.5,
+      "recommendation": "Next set: 38.6kg, 6 reps, rest for 65 seconds"
+    },
+    "enhanced": {
+      "fatigue": "Moderate",
+      "confidence": 0.5,
+      "recommendation": "Next set: 38.6kg, 6 reps, rest for 65 seconds",
+      "analysis": {
+        "velocity_loss": 62.222222222222236,
+        "force_decay": 35.0,
+        "total_work": 340.8,
+        "power_trend": -1,
+        "early_vs_late_speed_ratio": 0.48837209302325574,
+        "insights": [
+          "Significant velocity loss indicates high fatigue",
+          "Substantial drop in speed during later reps"
+        ]
+      }
+    },
+    "velocity_loss": 66.0
+  },
+  {
+    "scenario": "Female intermediate user",
+    "standard": {
+      "fatigue": "Moderate",
+      "confidence": 0.5,
+      "recommendation": "Next set: 14.3kg, 12 reps, rest for 75 seconds"
+    },
+    "enhanced": {
+      "fatigue": "Moderate",
+      "confidence": 0.5,
+      "recommendation": "Next set: 14.3kg, 12 reps, rest for 75 seconds",
+      "analysis": {
+        "velocity_loss": 97.77777777777777,
+        "force_decay": 55.00000000000001,
+        "total_work": 365.92,
+        "power_trend": -1,
+        "early_vs_late_speed_ratio": 0.1794871794871795,
+        "insights": [
+          "Significant velocity loss indicates high fatigue",
+          "Substantial drop in speed during later reps"
+        ]
+      }
+    },
+    "velocity_loss": 98.0
+  }
+]

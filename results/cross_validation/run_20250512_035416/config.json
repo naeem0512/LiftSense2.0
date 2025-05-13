@@ -1,0 +1,8 @@
+{
+    "data_path": "data/workout_data.csv",
+    "n_splits": 5,
+    "epochs": 150,
+    "batch_size": 32,
+    "patience": 15,
+    "timestamp": "20250512_035416"
+}

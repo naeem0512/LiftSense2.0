@@ -1,0 +1,26 @@
+=== Session Report ===
+User: Male, 25yo
+Level: Beginner | Goal: Strength
+Recovery Rate: 0.9x
+
+=== Set-by-Set Metrics ===
+
+=== RL Recommendation Analysis ===
+Recommendations compared: 3
+RL vs Traditional differences:
+  Weight: 0.0kg
+  Reps: 0.0
+  Rest: 0.0s
+Average RL confidence: 0.50
+Average RL safety score: 0.00
+
+Summary: RL confidence was moderate.
+
+=== Safety Events ===
+- EXCESSIVE_VELOCITY_LOSS
+
+=== Performance Trends ===
+Peak Velocity Loss: 0.0%
+Peak HR: 0bpm
+Average Mechanical Work: nan N·m/s
+Fatigue Progression: 

@@ -1,0 +1,35 @@
+{
+  "timestamp": "2025-05-12 18:14:50",
+  "execution_time": "12.41 seconds",
+  "status": "failed",
+  "config": {
+    "data": {
+      "num_users": 150,
+      "num_sets": 5,
+      "num_reps": 10,
+      "random_seed": 42,
+      "force_velocity_threshold": -0.4
+    },
+    "training": {
+      "test_size": 0.2,
+      "epochs": 100,
+      "batch_size": 32,
+      "patience": 15,
+      "min_accuracy": 0.85,
+      "initial_lr": 0.001,
+      "warmup_epochs": 5,
+      "augment_prob": 0.5,
+      "l2_reg": 0.01,
+      "dropout_rate": 0.3
+    },
+    "feedback": {
+      "simulation_mode": true,
+      "safety_mode": true,
+      "debug": false
+    }
+  },
+  "system_info": {
+    "python_version": "3.12.4 | packaged by Anaconda, Inc. | (main, Jun 18 2024, 10:07:17) [Clang 14.0.6 ]",
+    "platform": "darwin"
+  }
+}

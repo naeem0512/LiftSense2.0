@@ -1,0 +1,34 @@
+Model Robustness Analysis Results
+===============================
+
+Feature Perturbation Sensitivity:
+sets: 0.9830
+reps: 0.9848
+rep_speed: 0.9830
+force_output: 0.9830
+heart_rate: 0.9839
+grip_strength: 0.9830
+velocity_loss: 0.9543
+recovery_rate: 0.9839
+fitness_level: 0.9839
+workout_goal: 0.9839
+gender: 0.9830
+age: 0.9839
+work_capacity: 0.9830
+relative_intensity: 0.9866
+density: 0.9848
+velocity_force_ratio: 0.9857
+fatigue_index: 0.9776
+recovery_efficiency: 0.9830
+rolling_velocity: 0.9848
+rolling_force: 0.9839
+velocity_trend: 0.9839
+
+Adversarial Test Accuracy: 0.7599
+
+Most Sensitive Features:
+relative_intensity: 0.9866
+velocity_force_ratio: 0.9857
+reps: 0.9848
+density: 0.9848
+rolling_velocity: 0.9848

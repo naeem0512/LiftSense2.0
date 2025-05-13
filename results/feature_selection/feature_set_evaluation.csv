@@ -1,0 +1,5 @@
+feature_set,n_features,features,test_accuracy,test_loss,final_val_accuracy,final_val_loss
+original,21,"['sets', 'reps', 'rep_speed', 'force_output', 'heart_rate', 'grip_strength', 'velocity_loss', 'recovery_rate', 'fitness_level', 'workout_goal', 'gender', 'age', 'work_capacity', 'relative_intensity', 'density', 'velocity_force_ratio', 'fatigue_index', 'recovery_efficiency', 'rolling_velocity', 'rolling_force', 'velocity_trend']",0.9793906807899475,0.05370823293924332,0.9892473220825195,0.02786976657807827
+correlation_based,9,"['sets', 'reps', 'recovery_rate', 'fitness_level', 'workout_goal', 'gender', 'age', 'recovery_efficiency', 'velocity_trend']",0.897849440574646,0.2416333705186844,0.9139785170555115,0.20924149453639984
+rfe_based,10,"['age', 'work_capacity', 'relative_intensity', 'density', 'velocity_force_ratio', 'fatigue_index', 'recovery_efficiency', 'rolling_velocity', 'rolling_force', 'velocity_trend']",0.975806474685669,0.05524076521396637,0.9847670197486877,0.04604482650756836
+combined,3,"['velocity_trend', 'recovery_efficiency', 'age']",0.5555555820465088,0.90669846534729,0.5528674125671387,0.9102485775947571

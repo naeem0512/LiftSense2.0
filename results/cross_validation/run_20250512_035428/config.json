@@ -1,0 +1,10 @@
+{
+    "n_splits": 5,
+    "metrics": [
+        "accuracy",
+        "precision",
+        "recall",
+        "f1"
+    ],
+    "timestamp": "20250512_035428"
+}

@@ -1,0 +1,72 @@
+LIFTSENSE 2.0 EVALUATION SUMMARY
+===============================
+
+Evaluation completed on: 2025-05-11 23:15:49
+Test set size: 75 samples
+
+MODEL PERFORMANCE
+-----------------
+Standard Model Accuracy: 0.3867
+  - High Fatigue Detection: 0.0000
+  - Critical Error Rate: 0.7917
+Standard_calibrated Model Accuracy: 0.3867
+  - High Fatigue Detection: 0.0000
+  - Critical Error Rate: 0.7917
+Safety Model Accuracy: 0.4933
+  - High Fatigue Detection: 0.6250
+  - Critical Error Rate: 0.3750
+Safety_calibrated Model Accuracy: 0.4933
+  - High Fatigue Detection: 0.6250
+  - Critical Error Rate: 0.3750
+Ensemble Model Accuracy: 0.4133
+  - High Fatigue Detection: 0.2917
+  - Critical Error Rate: 0.7083
+
+UNCERTAINTY QUANTIFICATION
+-------------------------
+Standard Model:
+  - Mean Uncertainty: 0.0121
+  - Uncertainty Ratio: 0.8802
+Safety Model:
+  - Mean Uncertainty: 0.0122
+  - Uncertainty Ratio: 1.0208
+
+MODEL CALIBRATION
+-----------------
+Standard:
+  - ECE: 0.0374
+  - Brier Score: 0.2179
+Safety:
+  - ECE: 0.0852
+  - Brier Score: 0.2182
+Standard_calibrated_calibrated:
+  - ECE: 0.0806
+  - Brier Score: 0.2171
+Safety_calibrated_calibrated:
+  - ECE: 0.0895
+  - Brier Score: 0.2174
+
+ENSEMBLE SYSTEM PERFORMANCE
+--------------------------
+Accuracy: 0.0000
+High Fatigue Detection: 0.0000
+Critical Error Rate: 0.0000
+Mean Confidence: 0.0000
+
+FEEDBACK SYSTEM COMPARISON
+--------------------------
+Scenario: Beginner with high fatigue
+  Velocity Loss: 235.0%
+  Standard System: Moderate fatigue (0.50 confidence)
+  Enhanced System: Moderate fatigue (0.50 confidence)
+
+Scenario: Advanced with moderate fatigue
+  Velocity Loss: 66.0%
+  Standard System: Moderate fatigue (0.50 confidence)
+  Enhanced System: Moderate fatigue (0.50 confidence)
+
+Scenario: Female intermediate user
+  Velocity Loss: 98.0%
+  Standard System: Moderate fatigue (0.50 confidence)
+  Enhanced System: Moderate fatigue (0.50 confidence)
+

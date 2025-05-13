@@ -1,0 +1,63 @@
+{
+  "overall_accuracy": 0.9590163934426229,
+  "class_metrics": {
+    "High": {
+      "precision": 0.9747899159663865,
+      "recall": 0.9666666666666667,
+      "f1_score": 0.9707112970711297,
+      "support": 120
+    },
+    "Low": {
+      "precision": 0.9834710743801653,
+      "recall": 0.952,
+      "f1_score": 0.967479674796748,
+      "support": 125
+    },
+    "Moderate": {
+      "precision": 0.9206349206349206,
+      "recall": 0.9586776859504132,
+      "f1_score": 0.9392712550607287,
+      "support": 121
+    }
+  },
+  "confusion_matrix": [
+    [
+      116,
+      0,
+      4
+    ],
+    [
+      0,
+      119,
+      6
+    ],
+    [
+      3,
+      2,
+      116
+    ]
+  ],
+  "feature_importance": {
+    "velocity_loss": 0.5191256830601092,
+    "fatigue_index": 0.1693989071038251,
+    "sets": 0.16120218579234968,
+    "grip_strength": 0.09562841530054644,
+    "relative_intensity": 0.08469945355191255,
+    "velocity_force_ratio": 0.060109289617486295,
+    "recovery_efficiency": 0.05737704918032782,
+    "work_capacity": 0.021857923497267673,
+    "fitness_level": -0.016393442622950838,
+    "rep_speed": 0.008196721311475419,
+    "recovery_rate": 0.005464480874316946,
+    "rolling_velocity": 0.005464480874316946,
+    "force_output": 0.002732240437158473,
+    "heart_rate": 0.002732240437158473,
+    "workout_goal": 0.002732240437158473,
+    "gender": -0.002732240437158473,
+    "density": 0.002732240437158473,
+    "rolling_force": 0.002732240437158473,
+    "velocity_trend": -0.002732240437158473,
+    "reps": 0.0,
+    "age": 0.0
+  }
+}

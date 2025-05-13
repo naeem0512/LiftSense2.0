@@ -1,0 +1,15 @@
+=== Session Report ===
+User: Female, 28yo
+Level: Advanced | Goal: Endurance
+Recovery Rate: 1.2x
+
+=== Set-by-Set Metrics ===
+
+=== Safety Events ===
+- EXCESSIVE_VELOCITY_LOSS
+
+=== Performance Trends ===
+Peak Velocity Loss: 0.0%
+Peak HR: 0bpm
+Average Mechanical Work: nan N·m/s
+Fatigue Progression: 

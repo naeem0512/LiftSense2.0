@@ -1,0 +1,10 @@
+{
+    "data_path": "data/workout_data.csv",
+    "n_splits": 5,
+    "epochs": 150,
+    "batch_size": 32,
+    "patience": 20,
+    "l2_reg": 0.01,
+    "dropout_rate": 0.3,
+    "timestamp": "20250512_040033"
+}
