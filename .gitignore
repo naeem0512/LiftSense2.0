@@ -22,3 +22,29 @@ logs/*.log
 
 # Jupyter notebooks
 .ipynb_checkpoints/
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Env & secrets
+.env
+.env.*
+config/google_fit_credentials.json
+google_fit_credentials.json
+
+# Models / artifacts / logs
+models/
+data/models/
+artifacts/
+mlruns/
+*.h5
+*.hdf5
+*.pkl
+*.joblib
+*.pth
+results/logs/
+src/results/
+
+# OS
+.DS_Store
