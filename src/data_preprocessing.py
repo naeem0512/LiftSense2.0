@@ -201,7 +201,7 @@ def simulate_workout_data(random_seed=None, num_users=100, num_sets=5, num_reps=
     
     return df
 
-def calculate_rolling_features(df: pd.DataFrame) -> pd.DataFrame:
+def calculate_rolling_features(df: pd.DataFrame, window_size: int = 5) -> pd.DataFrame:
     """
     Calculate rolling features for time series data.
     
@@ -224,7 +224,6 @@ def calculate_rolling_features(df: pd.DataFrame) -> pd.DataFrame:
     df['recovery_efficiency'] = df['recovery_rate'] / (df['heart_rate'] + 1)
     
     # Rolling metrics for temporal patterns
-    window_size = 5
     df['rolling_velocity'] = df['rep_speed'].rolling(window=window_size, min_periods=1).mean()
     df['rolling_force'] = df['force_output'].rolling(window=window_size, min_periods=1).mean()
     
@@ -240,7 +239,10 @@ def calculate_rolling_features(df: pd.DataFrame) -> pd.DataFrame:
     
     return df
 
-def preprocess_data(df: pd.DataFrame, config: Dict[str, Any] = None) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, StandardScaler, LabelEncoder, LabelEncoder, LabelEncoder, LabelEncoder]:
+def preprocess_data(
+    df: pd.DataFrame,
+    config: Dict[str, Any] = None
+) -> Tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, StandardScaler, LabelEncoder, LabelEncoder, LabelEncoder, LabelEncoder]:
     """
     Enhanced preprocessing pipeline with train/val/test split and proper feature engineering
     
@@ -296,6 +298,13 @@ def preprocess_data(df: pd.DataFrame, config: Dict[str, Any] = None) -> Tuple[np
         numerical_cols = df.select_dtypes(include=[np.number]).columns
         df[numerical_cols] = df[numerical_cols].fillna(df[numerical_cols].median())
 
+    # Extract preprocessing configuration
+    config = config or {}
+    window_size = int(config.get("window_size", 10))
+    rolling_window = int(config.get("rolling_window", min(5, window_size)))
+    if window_size < 2:
+        raise ValueError("window_size must be at least 2 to build sliding windows")
+
     # Initialize encoders
     le_fatigue = LabelEncoder()
     le_fitness = LabelEncoder()
@@ -316,9 +325,9 @@ def preprocess_data(df: pd.DataFrame, config: Dict[str, Any] = None) -> Tuple[np
 
     # Calculate rolling features separately for each split
     logger.info("Calculating rolling features...")
-    train_df = calculate_rolling_features(train_df)
-    val_df = calculate_rolling_features(val_df)
-    test_df = calculate_rolling_features(test_df)
+    train_df = calculate_rolling_features(train_df, window_size=rolling_window)
+    val_df = calculate_rolling_features(val_df, window_size=rolling_window)
+    test_df = calculate_rolling_features(test_df, window_size=rolling_window)
 
     # Define feature columns
     feature_columns = [
@@ -368,12 +377,17 @@ def preprocess_data(df: pd.DataFrame, config: Dict[str, Any] = None) -> Tuple[np
 
     # Prepare sequences for LSTM
     logger.info("Preparing sequences for LSTM...")
-    time_steps = 10
+    time_steps = window_size
 
     def prepare_sequences(data_df):
         X = data_df[feature_columns].values.astype(np.float32)  # Ensure float32 for features
         y = data_df['fatigue_level'].values.astype(np.int32)    # Ensure int32 for labels
         n_samples = len(X) - time_steps + 1
+        if n_samples <= 0:
+            raise ValueError(
+                "Insufficient samples to build sliding windows. "
+                f"Received {len(X)} rows with window_size={time_steps}."
+            )
         n_features = X.shape[1]
         X_seq = np.zeros((n_samples, time_steps, n_features), dtype=np.float32)  # Ensure float32
         y_seq = np.zeros(n_samples, dtype=np.int32)  # Ensure int32

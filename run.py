@@ -9,9 +9,11 @@ import os
 import time
 import json
 import logging
-import pandas as pd
 from pathlib import Path
-from typing import Optional, Dict, Any
+from typing import Dict, Any
+
+import numpy as np
+import pandas as pd
 
 # Configure absolute imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "src")))
@@ -42,7 +44,9 @@ CONFIG = {
         "warmup_epochs": 5,
         "augment_prob": 0.5,
         "l2_reg": 0.01,
-        "dropout_rate": 0.3
+        "dropout_rate": 0.3,
+        "window_size": 12,
+        "rolling_window": 5
     },
     "feedback": {
         "simulation_mode": True,
@@ -84,13 +88,36 @@ def generate_and_validate_data() -> pd.DataFrame:
         logging.error(f"Data generation failed: {str(e)}")
         raise RuntimeError("Data simulation failed") from e
 
+def _to_serializable(obj: Any) -> Any:
+    """Recursively convert numpy types to native Python types for JSON serialization."""
+    if isinstance(obj, (np.integer, np.int64)):
+        return int(obj)
+    if isinstance(obj, (np.floating, np.float64)):
+        return float(obj)
+    if isinstance(obj, np.ndarray):
+        return obj.tolist()
+    if isinstance(obj, list):
+        return [_to_serializable(item) for item in obj]
+    if isinstance(obj, dict):
+        return {key: _to_serializable(value) for key, value in obj.items()}
+    return obj
+
+
 def train_and_validate_model(df: pd.DataFrame) -> Dict[str, Any]:
     """Complete model training pipeline with validation"""
     logging.info("Preprocessing data...")
     
     try:
         # Preprocess data
-        X_train, y_train, X_val, y_val, X_test, y_test, scaler, le_fatigue, le_fitness, le_goal, le_gender = preprocess_data(df)
+        preprocessing_config = {
+            "window_size": CONFIG["training"]["window_size"],
+            "rolling_window": CONFIG["training"]["rolling_window"]
+        }
+
+        X_train, y_train, X_val, y_val, X_test, y_test, scaler, le_fatigue, le_fitness, le_goal, le_gender = preprocess_data(
+            df,
+            config=preprocessing_config
+        )
         validate_preprocessing(X_train, y_train)
         
         logging.info(f"Data preprocessed. Shapes:")
@@ -128,12 +155,28 @@ def train_and_validate_model(df: pd.DataFrame) -> Dict[str, Any]:
         if best_metrics["val_accuracy"] < CONFIG["training"]["min_accuracy"]:
             logging.warning(f"Model accuracy below threshold: {best_metrics['val_accuracy']:.2f}")
         
-        logging.info(f"Model training complete. Best validation metrics:")
+        logging.info("Model training complete. Best validation metrics:")
         logging.info(f"Accuracy: {best_metrics['val_accuracy']:.4f}")
         logging.info(f"Precision: {best_metrics['val_precision']:.4f}")
         logging.info(f"Recall: {best_metrics['val_recall']:.4f}")
         logging.info(f"AUC: {best_metrics['val_auc']:.4f}")
-        
+
+        # Persist training metrics for the dashboard
+        metrics_payload = {
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "window_size": CONFIG["training"]["window_size"],
+            "history": {
+                metric: [_to_serializable(value) for value in training_results["history"].get(metric, [])]
+                for metric in training_results["history"]
+            },
+            "best_metrics": _to_serializable(best_metrics)
+        }
+
+        metrics_path = Path("results/training_metrics.json")
+        metrics_path.parent.mkdir(parents=True, exist_ok=True)
+        with metrics_path.open("w") as metrics_file:
+            json.dump(metrics_payload, metrics_file, indent=2)
+
         return {
             "model": model,
             "history": training_results["history"],
@@ -174,6 +217,19 @@ def execute_real_time_feedback(training_artifacts: Dict[str, Any]) -> None:
         
         logging.info("Starting workout session...")
         feedback.start_session(user_profile)
+
+        session_payload = {
+            "timestamp": time.strftime("%Y-%m-%d %H:%M:%S"),
+            "profile": user_profile,
+            "session_data": _to_serializable(feedback.session_data),
+            "performance_metrics": _to_serializable(feedback.performance_metrics),
+            "safety_alerts": _to_serializable(feedback.safety_alerts)
+        }
+
+        session_path = Path("results/latest_session.json")
+        session_path.parent.mkdir(parents=True, exist_ok=True)
+        with session_path.open("w") as session_file:
+            json.dump(session_payload, session_file, indent=2)
         logging.info("Session completed successfully")
         
     except Exception as e:

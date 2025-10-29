@@ -2,7 +2,7 @@
 
 import tensorflow as tf
 from tensorflow.keras.models import Sequential, Model
-from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization, Input, Add, Multiply
+from tensorflow.keras.layers import LSTM, Dense, Dropout, BatchNormalization, Input, Add, Multiply, Bidirectional
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint
 from tensorflow.keras.layers import MultiHeadAttention, LayerNormalization
 from sklearn.model_selection import train_test_split
@@ -233,35 +233,30 @@ def fatigue_weighted_loss():
     return loss_fn
 
 def build_lstm_model(input_shape, num_classes=3, learning_rate=0.001, batch_size=32):
-    """Build a simple sequential LSTM model"""
-    model = tf.keras.Sequential([
-        # Input layer
-        tf.keras.layers.Input(shape=input_shape),
-        
-        # Simple LSTM
-        tf.keras.layers.LSTM(16),
-        tf.keras.layers.Dropout(0.3),
-        
-        # Dense layer
-        tf.keras.layers.Dense(32, activation='relu'),
-        tf.keras.layers.Dropout(0.2),
-        
-        # Output layer
-        tf.keras.layers.Dense(num_classes, activation='softmax')
-    ])
-    
-    # Use only accuracy metric to avoid conflicts
-    metrics = [
-        'accuracy'
-    ]
-    
-    # Simple compilation with metrics
+    """Build a bidirectional LSTM model for sliding-window fatigue classification."""
+
+    inputs = Input(shape=input_shape, name="timeseries_input")
+    x = Bidirectional(LSTM(64, return_sequences=True), name="bilstm_block_1")(inputs)
+    x = LayerNormalization(name="norm_block_1")(x)
+    x = Dropout(0.3, name="dropout_block_1")(x)
+
+    x = Bidirectional(LSTM(32, return_sequences=False), name="bilstm_block_2")(x)
+    x = Dropout(0.3, name="dropout_block_2")(x)
+
+    x = Dense(64, activation='relu', name="dense_projection")(x)
+    x = Dropout(0.2, name="dropout_projection")(x)
+
+    outputs = Dense(num_classes, activation='softmax', name="fatigue_head")(x)
+
+    model = tf.keras.Model(inputs=inputs, outputs=outputs, name="bilstm_fatigue_classifier")
+
+    optimizer = Adam(learning_rate=learning_rate)
     model.compile(
-        optimizer='adam',
+        optimizer=optimizer,
         loss='sparse_categorical_crossentropy',
-        metrics=metrics
+        metrics=['accuracy']
     )
-    
+
     return model
 
 def validate_data(X_train, y_train, X_val, y_val):
