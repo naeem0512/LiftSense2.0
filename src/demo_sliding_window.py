@@ -12,8 +12,9 @@ import numpy as np
 import pandas as pd
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
-if str(REPO_ROOT) not in sys.path:
-    sys.path.append(str(REPO_ROOT))
+repo_root_str = str(REPO_ROOT)
+if repo_root_str not in sys.path:
+    sys.path.insert(0, repo_root_str)
 
 from src.sliding_window_utils import (
     DEFAULT_MODEL_DIR,
