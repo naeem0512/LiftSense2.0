@@ -5,11 +5,8 @@ import logging
 from collections import deque
 from dataclasses import dataclass
 import matplotlib.pyplot as plt
-from pathlib import Path
 import json
 from datetime import datetime
-from sklearn.preprocessing import StandardScaler
-import joblib
 import tensorflow as tf
 
 from src.real_time_feedback import RealTimeFeedbackSystem
@@ -29,8 +26,8 @@ class PredictionWindow:
 class SlidingWindowPredictor(RealTimeFeedbackSystem):
     def __init__(
         self,
-        model_path: str,
-        scaler_path: str,
+        model_path: str = "data/models/best_lstm_model.keras",
+        scaler_path: str = "data/models/scaler.pkl",
         window_size: int = 5,
         min_confidence_threshold: float = 0.4,
         confidence_update_rate: float = 0.1
@@ -45,11 +42,11 @@ class SlidingWindowPredictor(RealTimeFeedbackSystem):
             min_confidence_threshold: Minimum confidence for predictions
             confidence_update_rate: Rate at which to update confidence
         """
-        super().__init__(model_path)
+        super().__init__(model_path=model_path, scaler_path=scaler_path)
         self.window_size = window_size
         self.min_confidence_threshold = min_confidence_threshold
         self.confidence_update_rate = confidence_update_rate
-        
+
         # Initialize sliding window
         self.prediction_window = deque(maxlen=window_size)
         self.feature_window = deque(maxlen=window_size)
@@ -57,17 +54,7 @@ class SlidingWindowPredictor(RealTimeFeedbackSystem):
         self.prediction_history = []
         # Add dummy user_profile to avoid attribute errors in demo
         self.user_profile = {}
-        
-        # Load scaler
-        self.scaler = joblib.load(scaler_path)
-        
-        # Load label encoder classes
-        label_classes_path = Path(model_path).parent / "new_label_encoder_classes.npy"
-        if label_classes_path.exists():
-            self.label_classes = np.load(label_classes_path, allow_pickle=True)
-        else:
-            self.label_classes = np.array(["Low", "Moderate", "High"])  # fallback
-        
+
     def update_prediction_window(self, rep_data: Dict[str, float]) -> Tuple[str, float]:
         """
         Update prediction window with new rep data and get updated prediction.
@@ -339,4 +326,4 @@ class SlidingWindowPredictor(RealTimeFeedbackSystem):
             Fatigue level label (str)
         """
         idx = int(np.argmax(prediction))
-        return str(self.label_classes[idx]) 
+        return str(self.le_fatigue.inverse_transform([idx])[0])

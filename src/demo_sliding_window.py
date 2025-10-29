@@ -2,9 +2,7 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 import logging
-import time
 from typing import Dict, Any, List, Optional
-import json
 import matplotlib.pyplot as plt
 from datetime import datetime
 import sys
@@ -19,10 +17,10 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 class DemoWorkoutSimulator:
-    def __init__(self, 
-                 model_path: str,
-                 scaler_path: str,
-                 data_path: str,
+    def __init__(self,
+                 model_path: str = "data/models/best_lstm_model.keras",
+                 scaler_path: str = "data/models/scaler.pkl",
+                 data_path: str = "data/augmented_workout_data.csv",
                  window_size: int = 5,
                  min_confidence_threshold: float = 0.4):
         """Initialize the demo workout simulator."""
@@ -159,9 +157,9 @@ class DemoWorkoutSimulator:
             plt.show()
         plt.close()
 
-def run_demo(model_path: str, 
-            scaler_path: str,
-            data_path: str,
+def run_demo(model_path: str = "data/models/best_lstm_model.keras",
+            scaler_path: str = "data/models/scaler.pkl",
+            data_path: str = "data/augmented_workout_data.csv",
             num_reps: int = 30,
             window_size: int = 5,
             min_confidence_threshold: float = 0.4,
@@ -205,19 +203,7 @@ def run_demo(model_path: str,
 
 def main():
     """Main entry point for the demo."""
-    model_path = "models/new_fatigue_model.h5"
-    scaler_path = "models/new_augmented_scaler.joblib"
-    data_path = "data/augmented_workout_data.csv"
-    
-    run_demo(
-        model_path=model_path,
-        scaler_path=scaler_path,
-        data_path=data_path,
-        num_reps=30,
-        window_size=5,
-        min_confidence_threshold=0.4,
-        save_plot=True
-    )
+    run_demo()
 
 if __name__ == "__main__":
     main() 
