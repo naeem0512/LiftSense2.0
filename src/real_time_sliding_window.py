@@ -1,11 +1,5 @@
-"""Real-time sliding window inference utility.
+"""Real-time sliding window inference utility."""
 
-This script consumes streaming repetitions, maintains a rolling history,
-computes the same engineered features used during training, and produces
-fatigue predictions once the sliding window is filled.  It is designed as
-an executable demo that mirrors how a deployment pipeline can surface
-predictions after each repetition.
-"""
 from __future__ import annotations
 
 import argparse
@@ -15,31 +9,24 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Dict, Iterator, Optional
 
-import joblib
 import numpy as np
 import pandas as pd
-from tensorflow.keras.models import load_model
 
 import sys
-
 
 REPO_ROOT = Path(__file__).resolve().parent.parent
 if str(REPO_ROOT) not in sys.path:
     sys.path.append(str(REPO_ROOT))
 
-from src.data_preprocessing import calculate_rolling_features
-from src.demo_sliding_window import (
+from src.sliding_window_utils import (
     DEFAULT_MODEL_DIR,
-    ENCODER_KEYS,
     FEATURE_COLUMNS,
-    NUMERICAL_COLUMNS,
     RENAME_MAP,
     WINDOW_SIZE,
-    _scale_features,
+    load_components,
+    prepare_dataframe,
+    scale_features,
 )
-
-LOGGER = logging.getLogger(__name__)
-
 
 @dataclass
 class UserProfile:
@@ -58,20 +45,19 @@ class SlidingWindowPredictor:
 
     def __init__(
         self,
-        model_path: Path,
-        scaler_path: Path,
-        encoder_paths: Dict[str, Path],
+        *,
+        model,
+        scaler,
+        encoders: Dict[str, object],
         window_size: int = WINDOW_SIZE,
         rolling_window: int = 5,
     ) -> None:
         self.window_size = window_size
         self.rolling_window = min(rolling_window, window_size)
-        self.model = load_model(model_path)
-        self.scaler = joblib.load(scaler_path)
-        self.encoders = {
-            key: joblib.load(path) for key, path in encoder_paths.items()
-        }
-        self.history = pd.DataFrame(columns=RENAME_MAP.values())
+        self.model = model
+        self.scaler = scaler
+        self.encoders = encoders
+        self.history = pd.DataFrame(columns=list(RENAME_MAP.keys()))
 
     @property
     def fatigue_encoder(self):
@@ -79,17 +65,20 @@ class SlidingWindowPredictor:
 
     def update(self, rep: Dict[str, float | int | str]) -> Optional[Dict[str, float]]:
         """Append a repetition and return prediction probabilities when ready."""
-        row = self._prepare_row(rep)
+
+        row = self._validate_rep(rep)
         self.history = pd.concat([self.history, row], ignore_index=True)
 
         if len(self.history) < self.window_size:
             return None
 
         window_df = self.history.iloc[-self.window_size :].copy()
-        window_df = calculate_rolling_features(
-            window_df, window_size=self.rolling_window
+        window_df = prepare_dataframe(
+            window_df,
+            self.encoders,
+            rolling_window=self.rolling_window,
         )
-        scaled = _scale_features(window_df, self.scaler)
+        scaled = scale_features(window_df, self.scaler)
 
         features = scaled[FEATURE_COLUMNS].values.astype(np.float32)
         features = features.reshape(1, self.window_size, -1)
@@ -99,33 +88,14 @@ class SlidingWindowPredictor:
             for label, prob in zip(self.fatigue_encoder.classes_, probabilities)
         }
 
-    def _prepare_row(self, rep: Dict[str, float | int | str]) -> pd.DataFrame:
-        renamed = {
-            RENAME_MAP[key]: rep[key]
-            for key in RENAME_MAP
-            if key in rep
-        }
+    def _validate_rep(self, rep: Dict[str, float | int | str]) -> pd.DataFrame:
         missing = [key for key in RENAME_MAP if key not in rep]
         if missing:
             raise ValueError(
-                "Rep data missing required fields: " + ", ".join(missing)
+                "Rep data missing required fields: " + ", ".join(sorted(missing))
             )
-
-        for original, lowered in RENAME_MAP.items():
-            renamed[original] = renamed[lowered]
-
-        for column, encoder_key in ENCODER_KEYS.items():
-            encoder = self.encoders[encoder_key]
-            value = renamed[column]
-            try:
-                renamed[column] = int(encoder.transform([value])[0])
-            except ValueError as exc:  # pragma: no cover - defensive branch
-                valid = ", ".join(map(str, encoder.classes_))
-                raise ValueError(
-                    f"Unsupported value '{value}' for '{column}'. Expected one of: {valid}"
-                ) from exc
-
-        return pd.DataFrame([renamed])
+        ordered_rep = {key: rep[key] for key in RENAME_MAP}
+        return pd.DataFrame([ordered_rep])
 
 
 def generate_rep_stream(profile: UserProfile) -> Iterator[Dict[str, float | int | str]]:
@@ -160,20 +130,11 @@ def generate_rep_stream(profile: UserProfile) -> Iterator[Dict[str, float | int 
 def build_predictor(
     model_dir: Path, window_size: int, rolling_window: int
 ) -> SlidingWindowPredictor:
-    model_path = model_dir / "final_model.keras"
-    if not model_path.exists():
-        model_path = model_dir / "best_lstm_model.keras"
-    scaler_path = model_dir / "scaler.pkl"
-    encoder_paths = {
-        "fitness": model_dir / "le_fitness.pkl",
-        "goal": model_dir / "le_goal.pkl",
-        "gender": model_dir / "le_gender.pkl",
-        "fatigue": model_dir / "le_fatigue.pkl",
-    }
+    model, scaler, encoders = load_components(model_dir)
     return SlidingWindowPredictor(
-        model_path=model_path,
-        scaler_path=scaler_path,
-        encoder_paths=encoder_paths,
+        model=model,
+        scaler=scaler,
+        encoders=encoders,
         window_size=window_size,
         rolling_window=rolling_window,
     )
