@@ -163,107 +163,61 @@ print(f"Recommended reps: {recommendations['reps']}")
 
 ## Component Architecture
 
-The system consists of the following core components:
+The repository now focuses on the streamlined research workflow that powers the fatigue model. The core pieces are:
 
-1. **Web Interface** (`app.py`)
-   - Main user interface
-   - Session management
-   - Real-time feedback
+1. **Main pipeline (`run.py`)**
+   - Orchestrates data simulation, preprocessing, model training, and evaluation.
+   - Boots the real-time feedback system with the freshly trained artefacts.
 
-2. **Enhanced Sensors** (`enhanced_sensors.py`)
-   - Sensor configuration and management
-   - Data collection and processing
-   - Simulation capabilities
+2. **Data preprocessing (`src/data_preprocessing.py`)**
+   - Generates synthetic workout logs with strict physiological constraints.
+   - Handles scaling, label encoding, and dataset splits used across the project.
 
-3. **Technique Analyzer** (`technique_analyzer.py`)
-   - Movement pattern recognition
-   - Form assessment
-   - Feedback generation
+3. **Model definition (`src/model.py`)**
+   - Hosts the CNN-LSTM architecture and attention blocks used for fatigue prediction.
+   - Provides a single entry point for tailoring layers and regularisation.
 
-4. **Advanced Models** (`advanced_models.py`)
-   - Neural network architectures
-   - Transfer learning
-   - Confidence scoring
+4. **Training utilities (`src/model_training.py`)**
+   - Contains the training loop, callbacks, and augmentation helpers that power `run.py`.
+   - Exposes `build_lstm_model` and `train_model` for reuse in notebooks or experiments.
 
-5. **Database Manager** (`database_manager.py`)
-   - User and session storage
-   - Progress tracking
-   - Workout planning
+5. **Real-time feedback (`src/real_time_feedback.py`)**
+   - Streams inference results, interprets fatigue states, and generates actionable coaching cues.
+   - Integrates with the bio-signal simulator for hardware-free experimentation.
 
-6. **API Interface** (`api.py`)
-   - RESTful endpoints
-   - Mobile integration
-   - External system connectivity
+6. **Bio-signal simulation (`src/biosignal_simulator.py`)**
+   - Synthesises ECG, heart rate, acceleration, and EDA signals for end-to-end demos.
 
-7. **Data Visualization** (`dashboard.py`)
-   - Performance trends
-   - Form analysis visualizations
-   - Sensor data exploration
+7. **Calibration tools (`src/model_calibration.py`)**
+   - Implements temperature scaling and uncertainty estimation for safer deployment.
+
+8. **Shared utilities (`src/utils.py`)**
+   - Centralises logging configuration and expert heuristics for recommendation text.
 
 ## Extending the System
 
-### Adding New Exercises
+### Customising the model architecture
 
-To add a new exercise type:
-
-1. Create a movement pattern definition in `technique_analyzer.py`:
+The default network lives in `src/model.py`. To experiment with a different layout, modify `create_model` or add a new helper alongside it:
 
 ```python
-# Add to TechniqueAnalyzer.STANDARD_EXERCISES
-'new_exercise': {
-    'concentric': {
-        'accel_ranges': {'x': (0.5, 1.5), 'y': (-0.5, 0.5), 'z': (-0.3, 0.3)},
-        'gyro_ranges': {'x': (-50, 50), 'y': (-30, 30), 'z': (-20, 20)},
-        'emg_channels': {'primary': [0, 1], 'secondary': [], 'stabilizers': [4, 5]}
-    },
-    'eccentric': {
-        'accel_ranges': {'x': (0.2, 1.2), 'y': (-0.3, 0.3), 'z': (-0.2, 0.2)},
-        'gyro_ranges': {'x': (-30, 30), 'y': (-20, 20), 'z': (-15, 15)},
-        'emg_channels': {'primary': [0, 1], 'secondary': [], 'stabilizers': [4, 5]}
-    }
-}
+from src import model
+
+def create_compact_model(input_shape, num_classes):
+    inputs = tf.keras.layers.Input(shape=input_shape)
+    x = tf.keras.layers.LSTM(64, return_sequences=False)(inputs)
+    outputs = tf.keras.layers.Dense(num_classes, activation="softmax")(x)
+    return tf.keras.Model(inputs, outputs)
+
+# Use the custom model during training
+custom_model = create_compact_model(input_shape=(12, 10), num_classes=3)
 ```
 
-2. Add the exercise to the UI in `app.py`:
+Pass the custom model into `train_model` from `src/model_training.py` to reuse the optimisation logic and callbacks.
 
-```python
-# Add to exercise_dropdown options
-{"label": "New Exercise", "value": "new_exercise"}
-```
+### Adapting data generation
 
-### Creating Custom Models
-
-To add a custom model architecture:
-
-1. Create your model in `advanced_models.py`:
-
-```python
-def build_custom_model(self) -> tf.keras.Model:
-    """Build a custom model architecture"""
-    input_shape = self.config["input_shape"]
-    num_classes = self.config["num_classes"]
-    
-    # Define your model architecture
-    model = Sequential([
-        # Your layers here
-        Dense(num_classes, activation='softmax')
-    ])
-    
-    model.compile(
-        optimizer=Adam(learning_rate=self.config["learning_rate"]),
-        loss='sparse_categorical_crossentropy',
-        metrics=['accuracy']
-    )
-    
-    return model
-```
-
-2. Add it to the ModelManager class:
-
-```python
-# Add to the __init__ method
-self.custom_model = self.build_custom_model()
-```
+Workout synthesis happens in `simulate_workout_data` within `src/data_preprocessing.py`. You can tweak class balances, add new sensor channels, or pipe in recorded data before handing the arrays to `preprocess_data`.
 
 ## Configuration
 
@@ -288,20 +242,18 @@ The system can be configured through the `config/config.json` file. Key settings
 
 ### Common Issues
 
-1. **Services won't start**
-   - Check if ports are in use: `lsof -i :5000`
-   - Ensure data directories exist: `mkdir -p data/models`
-   - Check logs: `cat logs/liftsense.log`
+1. **`run.py` exits immediately**
+   - Verify dependencies are installed: `pip install -r requirements.txt`
+   - Remove corrupted artefacts and retry: `rm -rf data/models && python run.py`
+   - Inspect execution logs at `logs/execution.log` for stack traces.
 
-2. **No sensor data**
-   - Check sensor connection
-   - Try simulation mode: Edit `config.json` and set `"simulation_mode": true`
-   - Check permissions: `chmod +x enhanced_sensors.py`
+2. **Synthetic data generation fails**
+   - Confirm there is disk space for the CSV export in `data/`.
+   - Relax the force-velocity thresholds inside `simulate_workout_data` if you heavily customise the distributions.
 
-3. **Model prediction errors**
-   - Ensure models are trained: `python -m tools.train_models`
-   - Check model compatibility: Delete `data/models` folder and restart
-   - Try base model: Delete user-specific model in `data/user_models`
+3. **Real-time feedback shows stale outputs**
+   - Delete cached scalers/encoders in `data/models` so that `run.py` rebuilds them.
+   - When using hardware, fall back to the bundled simulator by enabling `simulation_mode` in `CONFIG` inside `run.py`.
 
 ### Getting Help
 
